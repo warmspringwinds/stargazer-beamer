@@ -6,6 +6,9 @@ with serif type and a single coherent accent color. It recreates the look of
 [touying](https://touying-typ.github.io/)'s *stargazer* theme in plain LaTeX/Beamer,
 so you get the modern aesthetic with the full Beamer ecosystem.
 
+Its restrained, serif aesthetic makes it a great fit for **academic
+presentations** — conference talks, lectures, lab meetings, and thesis defenses.
+
 ![Preview](assets/preview.png)
 
 ## Features
