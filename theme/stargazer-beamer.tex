@@ -1,0 +1,95 @@
+% =====================================================================
+%  "Stargazer" for Beamer — recreates the touying stargazer look:
+%  serif type · blue→black gradient title bar · top section-nav strip ·
+%  two-tone footer · blue rounded title box.
+% =====================================================================
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, calc, shadings}
+\usepackage{booktabs}\usepackage{graphicx}
+\usepackage{amsmath, amssymb}\usepackage{appendixnumberbeamer}
+\usepackage{newunicodechar}
+\newunicodechar{⟨}{\ensuremath{\langle}}\newunicodechar{⟩}{\ensuremath{\rangle}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}\newunicodechar{⇒}{\ensuremath{\Rightarrow}}
+\newunicodechar{—}{---}\newunicodechar{·}{\textperiodcentered}
+
+\usefonttheme{serif}                       % Latin Modern Roman, like stargazer
+
+% ---- palette ----
+\definecolor{SgBlue}{HTML}{1763C6}
+\definecolor{SgDark}{HTML}{0D0D0D}
+\definecolor{AppleBG}{HTML}{FFFFFF}\definecolor{AppleInk}{HTML}{1A1A1A}
+\definecolor{AppleBlue}{HTML}{1763C6}\definecolor{AppleGray}{HTML}{6E6E6E}
+\definecolor{AppleLine}{HTML}{D9D9D9}\definecolor{AppleSoft}{HTML}{EAF1FB}
+
+\usetheme{default}
+\setbeamercolor{normal text}{fg=AppleInk, bg=white}
+\setbeamercolor{structure}{fg=SgBlue}
+\setbeamercolor{itemize item}{fg=SgBlue}\setbeamercolor{itemize subitem}{fg=AppleGray}
+\setbeamercolor{block title}{fg=white, bg=SgBlue}
+\setbeamercolor{block body}{fg=AppleInk, bg=AppleSoft}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamerfont{frametitle}{series=\bfseries, size=\large}
+\setbeamerfont{title}{series=\bfseries, size=\LARGE}
+
+\newlength{\sgm}\setlength{\sgm}{0.8cm}
+\setbeamersize{text margin left=\sgm, text margin right=\sgm}
+
+% ---- top strip: horizontal section navigation on black ----
+\setbeamercolor{section in head/foot}{fg=white, bg=black}
+\setbeamercolor{section in head/foot shaded}{fg=white!45!black, bg=black}
+\setbeamerfont{section in head/foot}{size=\scriptsize}
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2.6ex, dp=1.1ex, sep=0pt]{section in head/foot}%
+    \hbox to\paperwidth{\hfil\insertsectionnavigationhorizontal{0.92\paperwidth}{}{}\hfil}%
+  \end{beamercolorbox}%
+}
+
+% ---- gradient title bar (full bleed) ----
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \hspace*{-\sgm}%
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (\paperwidth, 0.95cm);
+    \shade[left color=SgBlue, right color=SgDark] (0,0) rectangle (\paperwidth, 0.95cm);
+    \node[anchor=west, text=white, font=\usebeamerfont{frametitle}] at (\sgm, 0.48cm) {\insertframetitle};
+  \end{tikzpicture}%
+  \par\vspace{0.45em}%
+}
+
+% ---- two-tone footer ----
+\setbeamercolor{foot left}{fg=white, bg=black}
+\setbeamercolor{foot right}{fg=white, bg=SgBlue}
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth, ht=2.8ex, dp=1.3ex, leftskip=\sgm]{foot left}%
+      \tiny\insertshortauthor\hfill%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth, ht=2.8ex, dp=1.3ex, rightskip=\sgm]{foot right}%
+      \hfill\tiny\insertshorttitle\hspace{1.4em}\insertframenumber\,/\,\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+% ---- blue rounded title box ----
+\setbeamercolor{title box}{fg=white, bg=SgBlue}
+\setbeamertemplate{title page}{%
+  \vfill
+  \begin{beamercolorbox}[wd=\textwidth, sep=16pt, rounded=true, center]{title box}%
+    {\usebeamerfont{title}\inserttitle\par}\vspace{0.4em}
+    {\usebeamerfont{subtitle}\insertsubtitle\par}
+  \end{beamercolorbox}
+  \vspace{1.4em}
+  {\centering {\color{AppleInk}\insertauthor\par}\vspace{0.3em}{\small\color{AppleGray}\insertinstitute\par}\par}
+  \vfill
+}
+
+% ---- section pages (full color, optional) ----
+\setbeamercolor{section page}{fg=white, bg=SgBlue}
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[SgBlue] (current page.north west) rectangle (current page.south east);
+  \end{tikzpicture}%
+  \centering\vfill{\usebeamerfont{frametitle}\color{white}\Large\insertsectionhead\par}\vfill}
+
+\input{theme/_shared.tex}

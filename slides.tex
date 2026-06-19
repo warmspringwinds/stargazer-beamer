@@ -1,0 +1,145 @@
+% =====================================================================
+%  Stargazer for Beamer — demo deck
+%  A clean, modern Beamer theme: serif type, blue→black gradient title
+%  bars, a top section-navigation strip, a two-tone footer, and a blue
+%  rounded title box.  Swap in your own content in this file; the look
+%  lives entirely in theme/stargazer-beamer.tex.
+% =====================================================================
+\documentclass[10pt, aspectratio=169]{beamer}
+\input{theme/stargazer-beamer.tex}
+
+\title[Stargazer for Beamer]{Stargazer for Beamer}
+\subtitle{A clean, modern theme — gradient title bars, section nav, two-tone footer}
+\author{Your Name}
+\institute{Your Affiliation}
+\date{\today}
+
+\begin{document}
+
+% ---------- title page (no nav / footer) ----------
+{\setbeamertemplate{headline}{}\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+  \titlepage
+\end{frame}}
+
+% ---------- agenda ----------
+{\setbeamertemplate{headline}{}\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+  \vfill
+  \begin{beamercolorbox}[wd=\textwidth, sep=14pt, rounded=true, center]{title box}
+    {\usebeamerfont{title}Outline}
+  \end{beamercolorbox}
+  \vspace{1.6em}
+  \begin{itemize}\setlength{\itemsep}{0.9em}
+    \item[{\color{SgBlue}\large\bfseries 1.}] {\large\textbf{Introduction}}\\[0.1em]
+          \sub{What the theme gives you}
+    \item[{\color{SgBlue}\large\bfseries 2.}] {\large\textbf{Layouts}}\\[0.1em]
+          \sub{Columns, figures, flow diagrams}
+    \item[{\color{SgBlue}\large\bfseries 3.}] {\large\textbf{Results}}\\[0.1em]
+          \sub{Headline metrics and tables}
+  \end{itemize}
+  \vfill
+  {\centering\sub{Replace this with your own talk outline.}\par}
+  \vfill
+\end{frame}}
+
+% =====================================================================
+\section{Introduction}
+
+\begin{frame}{What this theme gives you}
+  \begin{itemize}
+    \item A \acc{blue\,$\to$\,black gradient} title bar, full-bleed across each slide.
+    \item A top \acc{section-navigation} strip that tracks where you are.
+    \item A two-tone footer with author, short title, and slide number.
+    \item Serif body type and a single coherent \acc{accent color}.
+  \end{itemize}
+  \vfill
+  \begin{block}{One-line swap}
+    The entire look is a single \texttt{\textbackslash input} at the top of
+    \texttt{slides.tex}. Keep your content; change the theme file to restyle.
+  \end{block}
+  \vfill
+  \sub{Tip: \texttt{\textbackslash acc\{...\}} highlights in the accent color, \texttt{\textbackslash sub\{...\}} for muted secondary text.}
+\end{frame}
+
+% =====================================================================
+\section{Layouts}
+
+\begin{frame}{A two-column layout}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.52\textwidth}
+      Put text on one side and a figure on the other:
+      \begin{itemize}
+        \item Balanced \acc{two-column} content.
+        \item Bullets, math $f(x)=\langle w, x\rangle$, and \acc{accents}.
+        \item Drop a real figure in place of the box.
+      \end{itemize}
+      \vfill
+      \sub{Use \texttt{\textbackslash figframe\{path\}\{caption\}} for a captioned image.}
+    \column{0.48\textwidth}
+      \placeholder[0.95]{your figure here\\[2pt]\scriptsize (\texttt{\textbackslash placeholder} or \texttt{\textbackslash includegraphics})}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Flow diagrams from shared styles}
+  \begin{center}
+  \begin{tikzpicture}[node distance=6mm and 11mm]
+    \node[flowbox] (in) {Input};
+    \node[flowaccent, right=of in] (enc) {Model\\\scriptsize accent box};
+    \node[flowbox, right=of enc] (dec) {Head};
+    \node[flowboxw, right=of dec] (out) {Output};
+    \draw[flowarr] (in) -- (enc); \draw[flowarr] (enc) -- (dec); \draw[flowarr] (dec) -- (out);
+    \node[flowlbl, below=2pt of enc] {pretrained};
+  \end{tikzpicture}
+  \end{center}
+  \vfill
+  \centering\sub{Styles \texttt{flowbox}, \texttt{flowboxw}, \texttt{flowaccent}, \texttt{flowarr} and \texttt{flowlbl} ship in \texttt{theme/\_shared.tex}.}
+\end{frame}
+
+% =====================================================================
+\section{Results}
+
+\begin{frame}{Headline metrics}
+  \vfill
+  \metricrow{96.5}{accuracy (\%)}{2.4$\times$}{faster}{0}{labels needed}
+  \vfill
+  \centering\sub{\texttt{\textbackslash metricrow\{\}\{\}...} renders three big accent numbers with captions.}
+\end{frame}
+
+\begin{frame}{A results table}
+  \centering {\small Benchmark — lower cost is better}\\[0.5em]
+  \begin{tabular}{l c c}
+    \toprule
+    \textbf{Method} & \textbf{Score} & \textbf{Cost} \\
+    \midrule
+    Baseline      & 81.2 & high \\
+    Prior work    & 88.0 & medium \\
+    \textbf{This theme} & \acc{\textbf{96.5}} & \acc{low} \\
+    \bottomrule
+  \end{tabular}
+  \vfill
+  \sub{\texttt{booktabs} tables look crisp; highlight a row with \texttt{\textbackslash acc\{\}}.}
+\end{frame}
+
+% =====================================================================
+\section{Closing}
+
+\begin{frame}{Takeaways}
+  \begin{enumerate}
+    \item A \acc{modern}, minimal Beamer look with almost no configuration.
+    \item Everything reusable lives in \texttt{theme/} — restyle in one place.
+    \item Build with \acc{Tectonic}: \texttt{./build.sh} $\to$ \texttt{slides.pdf}.
+  \end{enumerate}
+  \vfill
+  \centering\sub{Fork it, change the title, and present.}
+\end{frame}
+
+% ---------- closing (no nav / footer) ----------
+{\setbeamertemplate{headline}{}\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+  \centering\vfill
+  {\fontsize{36}{40}\selectfont\color{AppleInk}Thank you.}
+  \vfill
+\end{frame}}
+
+\end{document}

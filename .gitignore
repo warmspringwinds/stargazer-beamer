@@ -1,0 +1,12 @@
+# build artifacts
+build/
+*.aux
+*.log
+*.nav
+*.snm
+*.toc
+*.out
+*.vrb
+*.fls
+*.fdb_latexmk
+.DS_Store

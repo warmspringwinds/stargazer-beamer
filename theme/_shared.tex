@@ -1,0 +1,47 @@
+% =====================================================================
+%  Shared macros + TikZ styles used by every theme variant.
+%  Expects these colors to already be defined:
+%    AppleBG, AppleInk, AppleBlue, AppleGray, AppleLine, AppleSoft
+% =====================================================================
+
+\newcommand{\metric}[2]{%
+  \begin{minipage}[t]{\linewidth}\centering
+    {\fontsize{40}{44}\selectfont\color{AppleBlue}#1}\\[0.15em]
+    {\small\color{AppleGray}#2}
+  \end{minipage}}
+
+\newcommand{\metricrow}[6]{%
+  \begin{columns}[T,onlytextwidth]
+    \column{0.33\textwidth}\centering\metric{#1}{#2}
+    \column{0.33\textwidth}\centering\metric{#3}{#4}
+    \column{0.33\textwidth}\centering\metric{#5}{#6}
+  \end{columns}}
+
+\newcommand{\figframe}[3][0.85]{%
+  \begin{center}
+    \includegraphics[width=#1\linewidth]{#2}\\[0.4em]
+    {\small\color{AppleGray}#3}
+  \end{center}}
+
+\newcommand{\placeholder}[2][0.7]{%
+  \begin{center}\begin{tikzpicture}
+    \node[draw=AppleLine, fill=AppleSoft, rounded corners=4pt,
+          minimum width=#1\linewidth, minimum height=0.4\linewidth,
+          align=center, text=AppleGray, font=\small] {#2};
+  \end{tikzpicture}\end{center}}
+
+\newcommand{\acc}[1]{{\color{AppleBlue}#1}}
+\newcommand{\sub}[1]{{\color{AppleGray}#1}}
+
+\renewcommand{\arraystretch}{1.25}
+
+\tikzset{
+  flowbox/.style   = {draw=AppleLine, fill=AppleSoft, rounded corners=4pt,
+                      align=center, font=\small, inner sep=6pt,
+                      minimum height=1.05cm, text=AppleInk},
+  flowboxw/.style  = {flowbox, fill=AppleBG},
+  flowaccent/.style= {flowbox, draw=AppleBlue, line width=1pt},
+  flowarr/.style   = {-{Stealth[length=5pt]}, AppleBlue, line width=0.9pt},
+  flowarrg/.style  = {-{Stealth[length=5pt]}, AppleGray, line width=0.7pt},
+  flowlbl/.style   = {font=\scriptsize, text=AppleGray, inner sep=2pt},
+}
